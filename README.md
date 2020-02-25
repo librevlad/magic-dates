@@ -1,6 +1,6 @@
 # Magic Dates
 
-Work in progress
+Adds magic methods to your Eloquent query builder to work with dates.
 
 ## Installation
 
@@ -12,9 +12,7 @@ composer require librevlad/magic-dates
 
 ## Usage
 
-Adds magic methods to your Eloquent query builder to work with dates.
 Works only with fields explicitly declared on the $dates property of your model.
-
 
 ```php
 
