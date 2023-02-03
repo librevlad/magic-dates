@@ -4,6 +4,7 @@ namespace Librevlad\MagicDates;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 class MagicDatesServiceProvider extends ServiceProvider
 {
@@ -39,7 +40,7 @@ class MagicDatesServiceProvider extends ServiceProvider
                     $word = substr($word, 0, - 3);
                 }
 
-                $methodName = lcfirst(camel_case($word)) . 'Since';
+                $methodName = lcfirst(Str::camel($word)) . 'Since';
                 Builder::macro($methodName, function ($d) use ($methodName, $date) {
                     if (method_exists($this->model, $methodName) || method_exists($this->model, 'scope' . ucfirst($methodName))) {
                         return $this;
@@ -48,7 +49,7 @@ class MagicDatesServiceProvider extends ServiceProvider
                     return $this->where($date, '>', $d);
                 });
 
-                $methodName = lcfirst(camel_case($word)) . 'Before';
+                $methodName = lcfirst(Str::camel($word)) . 'Before';
                 Builder::macro($methodName, function ($d) use ($methodName, $date) {
                     if (method_exists($this->model, $methodName) || method_exists($this->model, 'scope' . ucfirst($methodName))) {
                         return $this;
@@ -57,7 +58,7 @@ class MagicDatesServiceProvider extends ServiceProvider
                     return $this->where($date, '<', $d);
                 });
 
-                $methodName = lcfirst(camel_case($word)) . 'Within';
+                $methodName = lcfirst(Str::camel($word)) . 'Within';
                 Builder::macro($methodName, function ($d) use ($methodName, $date) {
                     if (method_exists($this->model, $methodName) || method_exists($this->model, 'scope' . ucfirst($methodName))) {
                         return $this;
